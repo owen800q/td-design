@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, TextStyle } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import { GestureDetector } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 import { useTheme } from '@shopify/restyle';
@@ -65,7 +65,7 @@ const Slider: FC<SliderProps> = props => {
   const sliderRange = width - KNOB_WIDTH;
   const oneStepValue = sliderRange / 100;
 
-  const { progressStyle, knobStyle, onGestureEvent, label } = useSlider({
+  const { progressStyle, knobStyle, label, gesture } = useSlider({
     min,
     max,
     value,
@@ -102,9 +102,9 @@ const Slider: FC<SliderProps> = props => {
   const SliderContent = (
     <View style={[styles.slider]}>
       <Animated.View style={[styles.progress, progressStyle]}></Animated.View>
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
+      <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.knob, knobStyle]}></Animated.View>
-      </PanGestureHandler>
+      </GestureDetector>
     </View>
   );
 

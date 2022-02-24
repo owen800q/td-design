@@ -37,7 +37,7 @@ export default () => {
                 },
               ]}
               height={80}
-              overwriteDefaultActions={true}
+              // overwriteDefaultActions={true}
             >
               <View style={styles.rowContent}>
                 <View style={styles.rowIcon} />

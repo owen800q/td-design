@@ -19,6 +19,7 @@ const Accordion: FC<AccordionProps> = ({
 }) => {
   const theme = useTheme<Theme>();
   const { heights, contentHeights } = createSharedVariables(sections);
+
   const coverStyle = useAnimatedStyle(() => {
     const offset = contentHeights.reduce((accu, curr) => accu + curr.value, 0);
     return {
@@ -56,10 +57,11 @@ const Accordion: FC<AccordionProps> = ({
         style={[
           {
             position: 'absolute',
-            top: 300,
+            top: 0,
             width: '100%',
             height: '100%',
             backgroundColor: 'white',
+            zIndex: 99,
           },
           coverStyle,
         ]}

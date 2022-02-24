@@ -15,6 +15,7 @@ import { Theme } from '../theme';
 import helpers from '../helpers';
 import { useContext, useEffect } from 'react';
 import { SwipeRowContext } from './context';
+import { Gesture } from 'react-native-gesture-handler';
 
 const { deviceWidth } = helpers;
 export default function useSwipeRow({
@@ -46,12 +47,30 @@ export default function useSwipeRow({
 
   const removing = useSharedValue(false);
   const translateX = useSharedValue(0);
+  const startPosition = useSharedValue(0);
 
   useEffect(() => {
     if (id === anchor) {
       translateX.value = withSpring(0, springConfig(10));
     }
   }, [anchor, id, translateX]);
+
+  const gesture = Gesture.Pan()
+    .activeOffsetX([-10, 10])
+    .onStart(() => {
+      startPosition.value = translateX.value;
+    })
+    .onUpdate(e => {
+      translateX.value = e.translationX + startPosition.value;
+    })
+    .onEnd(evt => {
+      if (evt.velocityX < -20) {
+        translateX.value = withSpring(maxTranslate, springConfig(evt.velocityX));
+      } else {
+        translateX.value = withSpring(0, springConfig(evt.velocityX));
+      }
+      runOnJS(changeState)(anchor);
+    });
 
   const handler = useAnimatedGestureHandler({
     onStart(_, ctx: Record<string, number>) {
@@ -108,6 +127,7 @@ export default function useSwipeRow({
   return {
     theme,
     handler,
+    gesture,
     wrapStyle,
     buttonStyle,
     handleRemove: useMemoizedFn(handleRemove),

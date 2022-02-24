@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from '@td-design/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { useAtomValue } from 'jotai/utils';
 
@@ -14,11 +15,13 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
-      <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-        <NavigationContainer>
-          <MainStack />
-        </NavigationContainer>
-      </ThemeProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+          <NavigationContainer>
+            <MainStack />
+          </NavigationContainer>
+        </ThemeProvider>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 };
