@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { useRestyle, spacing } from '@shopify/restyle';
+import { useRestyle } from '@shopify/restyle';
 import { Spacing } from '../theme';
 
 export interface WingBlankProps {
@@ -8,7 +8,7 @@ export interface WingBlankProps {
 }
 
 const WingBlank: FC<WingBlankProps> = ({ children, size = 'x3' }) => {
-  const props = useRestyle([spacing], {
+  const props = useRestyle([], {
     marginHorizontal: size,
   });
   return (

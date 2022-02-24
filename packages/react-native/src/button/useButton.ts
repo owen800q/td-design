@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useTheme, spacing, layout, useRestyle } from '@shopify/restyle';
+import { useTheme, spacing, useRestyle } from '@shopify/restyle';
 import { Color, Theme } from '../theme';
 import helpers from '../helpers';
 
@@ -7,7 +7,7 @@ import type { ButtonProps } from '.';
 import { TouchableOpacityProps } from 'react-native';
 
 const { px } = helpers;
-const restyleFunctions = [spacing, layout];
+const restyleFunctions = [spacing];
 export default function useButton({
   loading,
   type = 'primary',

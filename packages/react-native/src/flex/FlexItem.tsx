@@ -5,7 +5,7 @@ import { Theme } from '../theme';
 
 const restyleFunctions = [spacing, border, layout];
 
-type FlexItemProps = SpacingProps<Theme> & BorderProps<Theme> & Omit<LayoutProps<Theme>, 'width'>;
+type FlexItemProps = SpacingProps<Theme> & BorderProps<Theme> & LayoutProps<Theme>;
 
 const FlexItem: FC<FlexItemProps> = ({ children, ...restProps }) => {
   const props = useRestyle(restyleFunctions, {

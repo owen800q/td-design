@@ -11,7 +11,7 @@ import { useCounter, useLatest } from '@td-design/rn-hooks';
 
 const { ONE_PIXEL, px } = helpers;
 
-export type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
+export type StepperProps = LayoutProps<Theme> & {
   /** 最小值 */
   min?: number;
   /** 最大值 */
@@ -26,8 +26,6 @@ export type StepperProps = Omit<LayoutProps<Theme>, 'width' | 'minWidth'> & {
   step?: number;
   /** 是否禁用 */
   disabled?: boolean;
-  /** 宽度 */
-  width?: number;
   /** 是否显示清除图标 */
   allowClear?: boolean;
   /** 是否允许手动输入 */
@@ -44,6 +42,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
       onChange,
       step = 1,
       width = px(200),
+      minWidth = px(120),
       defaultValue,
       disabled = false,
       allowClear = true,
@@ -54,7 +53,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
     _
   ) => {
     const theme = useTheme<Theme>();
-    const props = useRestyle([layout], layoutProps);
+    const props = useRestyle([layout], { ...layoutProps, width, minWidth });
     const onChangeRef = useLatest(onChange);
     const [current, { set, reset }] = useCounter(defaultValue ?? value, { min, max });
 
@@ -84,7 +83,7 @@ const Stepper = forwardRef<unknown, StepperProps>(
     };
 
     return (
-      <Flex {...props} width={width} minWidth={px(120)} height={STEPPER_HEIGHT}>
+      <Flex {...props} height={STEPPER_HEIGHT}>
         <TouchableOpacity activeOpacity={0.5} onPress={handleMinus} disabled={disabled || +current - step < min}>
           <Box
             width={STEPPER_HEIGHT}
