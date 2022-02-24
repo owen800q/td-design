@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { Theme, Flex } from '@td-design/react-native';
 import Animated from 'react-native-reanimated';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import { GestureDetector } from 'react-native-gesture-handler';
 
 import SwipeStar from './components/SwipeStar';
 import { SwipeRatingProps } from './type';
@@ -23,7 +23,7 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
       throw new Error('评分组件最大size不能超过80');
     }
 
-    const { primaryViewStyle, handler } = useSwipeRating({
+    const { primaryViewStyle, gesture } = useSwipeRating({
       fractions,
       size,
       rating,
@@ -41,7 +41,7 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
     };
 
     return (
-      <PanGestureHandler onGestureEvent={handler}>
+      <GestureDetector gesture={gesture}>
         <Animated.View style={[styles.startsWrapper, { width: count * size }]}>
           <View style={[styles.starsInsideWrapper]}>
             <Animated.View style={primaryViewStyle} />
@@ -50,7 +50,7 @@ const SwipeRating = forwardRef<unknown, SwipeRatingProps>(
             {renderRatings()}
           </Flex>
         </Animated.View>
-      </PanGestureHandler>
+      </GestureDetector>
     );
   }
 );

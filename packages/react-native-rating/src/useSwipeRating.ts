@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Gesture } from 'react-native-gesture-handler';
 import { runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { SwipeRatingProps } from './type';
 
@@ -11,6 +12,7 @@ export default function useSwipeRating({
   ratingFillColor,
 }: Pick<SwipeRatingProps, 'size' | 'count' | 'rating' | 'fractions' | 'onFinishRating'> & { ratingFillColor: string }) {
   const translateX = useSharedValue(0);
+  const startPosition = useSharedValue(0);
 
   const getCurrentRating = (translateX: number) => {
     'worklet';
@@ -35,6 +37,19 @@ export default function useSwipeRating({
     },
   });
 
+  const gesture = Gesture.Pan()
+    .onStart(() => {
+      startPosition.value = translateX.value;
+    })
+    .onUpdate(e => {
+      const value = e.translationX + startPosition.value;
+      translateX.value = value >= count * size ? count * size : value;
+    })
+    .onEnd(() => {
+      const currentRating = getCurrentRating(translateX.value);
+      onFinishRating && runOnJS(onFinishRating)(currentRating);
+    });
+
   const primaryViewStyle = useAnimatedStyle(() => {
     return {
       backgroundColor: ratingFillColor,
@@ -43,5 +58,5 @@ export default function useSwipeRating({
     };
   });
 
-  return { primaryViewStyle, handler };
+  return { primaryViewStyle, handler, gesture };
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { TapRating, SwipeRating, WhiteSpace } from '@td-design/react-native';
+import { WhiteSpace } from '@td-design/react-native';
+import { TapRating, SwipeRating } from '@td-design/react-native-rating';
 import Container from '../components/Container';
 import { View } from 'react-native';
 
@@ -14,7 +15,6 @@ export default () => {
             rating={2.2}
             size={68}
             fractions={0}
-            // tintColor="red"
             onFinishRating={position => {
               console.log(position);
             }}

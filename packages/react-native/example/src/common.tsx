@@ -74,6 +74,7 @@ export type ParamList = {
   SkeletonDemo: undefined;
   ErrorBlockDemo: undefined;
   ResultDemo: undefined;
+  Calendaremo: undefined;
 };
 export interface ScreenProps {
   route: RouteProp<ParamList, keyof ParamList>;
