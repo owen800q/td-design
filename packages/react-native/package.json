@@ -40,7 +40,7 @@
     "@react-native-community/eslint-config": "^3.0.1",
     "@react-native-picker/picker": "^2.3.0",
     "@react-navigation/native": "^6.0.8",
-    "@shopify/restyle": "^1.6.2",
+    "@shopify/restyle": "1.6.2",
     "@td-design/svgicon-cli": "^1.5.1",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/lodash-es": "^4.17.6",

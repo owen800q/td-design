@@ -65,8 +65,8 @@ import SkeletonDemo from '../screens/SkeletonDemo';
 import ErrorBlockDemo from '../screens/ErrorBlockDemo';
 import ResultDemo from '../screens/ResultDemo';
 import FloatButtonDemo from '../screens/FloatButtonDemo';
-import RatingDemo from '../screens/RatingDemo';
-import CalendarDemo from '../screens/CalendarDemo';
+// import RatingDemo from '../screens/RatingDemo';
+// import CalendarDemo from '../screens/CalendarDemo';
 
 const { px } = helpers;
 const Stack = createStackNavigator();
@@ -178,8 +178,8 @@ export const MainStack = () => {
       <Stack.Screen name="SkeletonDemo" component={SkeletonDemo} options={{ headerTitle: 'SkeletonDemo' }} />
       <Stack.Screen name="ErrorBlockDemo" component={ErrorBlockDemo} options={{ headerTitle: 'ErrorBlockDemo' }} />
       <Stack.Screen name="ResultDemo" component={ResultDemo} options={{ headerTitle: 'ResultDemo' }} />
-      <Stack.Screen name="RatingDemo" component={RatingDemo} options={{ headerTitle: 'RatingDemo' }} />
-      <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} />
+      {/* <Stack.Screen name="RatingDemo" component={RatingDemo} options={{ headerTitle: 'RatingDemo' }} /> */}
+      {/* <Stack.Screen name="CalendarDemo" component={CalendarDemo} options={{ headerTitle: 'CalendarDemo' }} /> */}
       <Stack.Screen
         name="PullToRefreshDemo"
         component={PullToRefreshDemo}

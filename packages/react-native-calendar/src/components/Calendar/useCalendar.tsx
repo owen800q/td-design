@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTheme } from '@shopify/restyle';
 import { DatePicker } from '@td-design/react-native-picker';
 import { Theme, Flex, helpers } from '@td-design/react-native';
-import { Directions, FlingGestureHandlerStateChangeEvent, Gesture, State } from 'react-native-gesture-handler';
+import { FlingGestureHandlerStateChangeEvent, State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -190,18 +190,6 @@ export default function useCalendar({
     }
   };
 
-  const leftFling = Gesture.Fling()
-    .direction(Directions.LEFT)
-    .onStart(() => {
-      addMonth(1);
-    });
-
-  const rightFling = Gesture.Fling()
-    .direction(Directions.RIGHT)
-    .onStart(() => {
-      addMonth(-1);
-    });
-
   const handleChange = (date?: Date) => {
     setCurrentMonth(dayjs(date));
     onMonthChangeRef.current?.(dateFormat(dayjs(date), 'YYYY-MM'));
@@ -238,8 +226,6 @@ export default function useCalendar({
 
   return {
     isFold,
-    leftFling,
-    rightFling,
     renderCalendar: useMemoizedFn(renderCalendar),
     handlerStateChange: useMemoizedFn(handlerStateChange),
   };

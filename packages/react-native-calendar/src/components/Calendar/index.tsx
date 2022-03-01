@@ -1,18 +1,23 @@
 import React from 'react';
-import { GestureDetector } from 'react-native-gesture-handler';
+import { FlingGestureHandler, Directions } from 'react-native-gesture-handler';
 import dayjs from 'dayjs';
 
 import useCalendar from './useCalendar';
 import { CalendarProps } from '../../type';
 
 const Calendar: React.FC<CalendarProps> = ({ enableSwipeMonths = true, ...restProps }) => {
-  const { isFold, renderCalendar, leftFling, rightFling } = useCalendar(restProps);
+  const { isFold, renderCalendar, handlerStateChange } = useCalendar(restProps);
 
   if (!enableSwipeMonths || !isFold) return <>{renderCalendar()}</>;
   return (
-    <GestureDetector gesture={leftFling}>
-      <GestureDetector gesture={rightFling}>{renderCalendar()}</GestureDetector>
-    </GestureDetector>
+    <FlingGestureHandler direction={Directions.LEFT} onHandlerStateChange={event => handlerStateChange(event, 'left')}>
+      <FlingGestureHandler
+        direction={Directions.RIGHT}
+        onHandlerStateChange={event => handlerStateChange(event, 'right')}
+      >
+        {renderCalendar()}
+      </FlingGestureHandler>
+    </FlingGestureHandler>
   );
 };
 
